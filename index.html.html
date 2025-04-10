@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>قارئ بطاقات التعبئة - النسخة النهائية</title>
+  <!-- نجعلها متجاوبة مع الشاشات -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- استدعاء ملف style.css -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- صفحة تسجيل الدخول -->
+<div class="box" id="loginBox">
+  <h2>تسجيل الدخول</h2>
+  <input id="username" placeholder="اسم المستخدم">
+  <input id="password" type="password" placeholder="كلمة المرور">
+  <button onclick="login()">دخول</button>
+  <p id="loginMsg" style="color:red;"></p>
+</div>
+
+<!-- واجهة التطبيق -->
+<div class="box" id="appBox">
+  <h2>تحليل الأكواد (4 4 4 3) وإطارات خضراء</h2>
+  <select id="category">
+    <option value="">اختر الفئة</option>
+    <option value="Mobilis100">Mobilis 100</option>
+    <option value="Mobilis200">Mobilis 200</option>
+    <option value="Mobilis500">Mobilis 500</option>
+    <option value="Mobilis1000">Mobilis 1000</option>
+    <option value="Mobilis2000">Mobilis 2000</option>
+  </select>
+
+  <input type="file" id="imageInput" accept="image/*">
+  <button onclick="analyzeImage()">تحليل الصورة</button>
+  <p id="codeCount"></p>
+  <textarea id="codeArea" rows="6" readonly></textarea>
+
+  <canvas id="analysisCanvas"></canvas>
+
+  <p>هل هناك أكواد ناقصة؟ أدخلها مفصولة بفواصل (بدون فراغ):</p>
+  <input id="manualCodes" placeholder="501717768793655,501412349876333">
+  <button onclick="addMissingCodes()">إضافة الناقص</button>
+
+  <button onclick="downloadCodes()">تحميل الأكواد كملف نصي</button>
+  <button onclick="saveToFirebase()">حفظ في Firebase</button>
+
+  <div id="debugMessages"></div>
+</div>
+
+<!-- سجل البطاقات -->
+<div class="box" id="historyBox">
+  <h3>سجل البطاقات</h3>
+  <div id="historyContent">جاري التحميل...</div>
+</div>
+
+<!-- واجهة البحث: لعرض الصورة فقط -->
+<div class="box" id="searchBox">
+  <h3>بحث عن الكود</h3>
+  <input id="searchCode" placeholder="مثال: 501717768793655">
+  <button onclick="searchOnlyImage()">بحث</button>
+  <div id="searchResult" style="margin-top:10px;"></div>
+</div>
+
+<!-- مكاتب Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+<!-- ملف السكربت الخارجي -->
+<script src="script.js"></script>
+</body>
+</html>
